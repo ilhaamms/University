@@ -57,7 +57,7 @@ class University:
 
             else:
                 print('\n[!] Pilihan Anda Salah!');
-                time.sleep(1.5);
+                time.sleep(2);
                 self.menu();
 
         except ValueError:
