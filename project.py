@@ -17,40 +17,22 @@ class University:
         # University.namaMahasiswa.sort();
         print('\tCari Data Berdasarkan Nama');
         print('='*50)
-        search = None;
-        try:
-            search = input('Masukan Nama Mahasiswa : ');
-            for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-                    if search == nameMhs:
-                        print('\nNama  : ', nameMhs)
-                        print('Nim   : ', nimMhs)
-                        print('Prodi : ', prodiMhs)
-                    else:
-                        print('\nData Tidak Ditemukan!');
-                        tanya = input('Cari data mahasiswa lagi (Y/N) ? : ');
+        
+        search = input('Masukan Nama Mahasiswa : ');
+        
+        for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
+            if search == nameMhs:
+                print('\nNama  : ', nameMhs)
+                print('Nim   : ', nimMhs)
+                print('Prodi : ', prodiMhs)
+            else:
+                print('\nData Tidak Ditemukan!');
+                tanya = input('Cari data mahasiswa lagi (Y/N) ? : ');
 
-                        if tanya == 'y' or tanya == 'Y':
-                            self.cariDataMahasiswa();
-                        else:
-                            self.menu();
-        except KeyboardInterrupt:
-            print('\n\nTidak Boleh Mencet Ctrl + C');
-            time.sleep(1.5);
-            self.cariDataMahasiswa();
-        # else:
-        #     for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-        #         if search == nameMhs:
-        #             print('\nNama  : ', nameMhs)
-        #             print('Nim   : ', nimMhs)
-        #             print('Prodi : ', prodiMhs)
-        #         else:
-        #             print('\nData Tidak Ditemukan!');
-        #             tanya = input('Cari data mahasiswa lagi (Y/N) ? : ');
-
-        #             if tanya == 'y' or tanya == 'Y':
-        #                 self.cariDataMahasiswa();
-        #             else:
-        #                 self.menu();
+                if tanya == 'y' or tanya == 'Y':
+                    self.cariDataMahasiswa();
+                else:
+                    self.menu();
 
     def menu(self):
         os.system('cls');
