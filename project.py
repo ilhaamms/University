@@ -90,41 +90,51 @@ class University:
         dataFirst = 1;
         print('\tInput Data Mahasiswa');
         print('='*40);
-        try:
-            dataInputMhs = int(input('Masukan Jumlah Yang Akan Diinput : '));
-        except ValueError:
-            print('\nHarap Masukan Angka!');
-            time.sleep(1.5);
-            self.inputDataMahasiswa();
+        # try:
+        dataInputMhs = int(input('Masukan Jumlah Yang Akan Diinput : '));
+        # except ValueError:
+        #     print('\nHarap Masukan Angka!');
+        #     time.sleep(1.5);
+        #     self.inputDataMahasiswa();
 
-        except KeyboardInterrupt:
-            print('\n\nTidak Boleh Mencet Ctrl + C');    
-            time.sleep(1.5);
-            self.inputDataMahasiswa();
-        else:
-            while dataFirst <= dataInputMhs:
-                print('\nData Mahasiswa Ke-', dataFirst);
-                print('='*25);
-                nama  = input('Masukan Nama  : ');
-                nim   = input('Masukan Nim   : ');
-                prodi = input('Masukan Prodi : ');
+        # except KeyboardInterrupt:
+        #     print('\n\nTidak Boleh Mencet Ctrl + C');    
+        #     time.sleep(1.5);
+        #     self.inputDataMahasiswa();
+
+        # else:
+        for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
+            print('\nData Mahasiswa Ke-', dataFirst);
+            print('='*25);
+            nama  = input('Masukan Nama  : ');
+            nim   = input('Masukan Nim   : ');
+            prodi = input('Masukan Prodi : ');
             
-                University.namaMahasiswa.append(nama);
-                University.nimMahasiswa.append(nim);
-                University.prodiMahasiswa.append(prodi);
+            nameMhs.append(nama);
+            nimMhs.append(nim);
+            prodiMhs.append(prodi);
 
-                dataFirst += 1;
+            dataFirst += 1;
 
-            question = input('Input data mahasiswa lagi (Y/N) ? : ')
-
-            if question == 'y' or question == 'Y':
-                print('\nData Berhasil Tersimpan!!');
-                time.sleep(1.5);
-                self.inputDataMahasiswa();
-            else:
-                print('\nData Berhasil Tersimpan!!');
-                time.sleep(1.5);
-                self.menu();
+            # try:
+            # question = input('Input data mahasiswa lagi (Y/N) ? : ')
+            # except KeyboardInterrupt:
+            #     print('Data Tidak Tersimpan!!');
+            #     time.sleep(1.5);
+            #     for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
+            #         nameMhs.pop();
+            #         nimMhs.pop();
+            #         prodiMhs.pop();
+            #         self.inputDataMahasiswa();
+            # else:
+            # if question == 'y' or question == 'Y':
+            #     print('\nData Berhasil Tersimpan!!');
+            #     time.sleep(1.5);
+            #     self.inputDataMahasiswa();
+            # else:
+            #     print('\nData Berhasil Tersimpan!!');
+            #     time.sleep(1.5);
+            #     self.menu();
 
     def cariDataMahasiswa(self):
         os.system('cls');
