@@ -1,5 +1,6 @@
 import os;
 import time;
+import sys;
 
 class University:
 
@@ -19,19 +20,22 @@ class University:
         print('[2] Input Data Mahasiswa');
         print('[3] Cari Data Mahasiswa');
         print('[4] Hapus Data Mahasiswa');
+        print('[5] Exit');
         try:
             menu = int(input('\n[-] Masukan Pilihan Anda : '));
             
             if menu == 1:
-                os.system('cls');
                 self.lihatDataMhs();
             elif menu == 2:
-                os.system('cls');
                 self.inputDataMahasiswa();
             elif menu == 3:
-                os.system('cls');
                 self.cariDataMahasiswa();
-
+            elif menu == 4:
+                self.hapusMhs();
+            elif menu == 5:
+                print('\n[-] Exit...');
+                time.sleep(1.5);
+                sys.exit();
             else:
                 print('\n[!] Pilihan Anda Salah!');
                 time.sleep(2);
@@ -135,7 +139,7 @@ class University:
         search = input('Masukan Nama Mahasiswa : ');
         
         for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-            if search == nameMhs:
+            if search == nameMhs or search == nimMhs:
                 print('\nNama  : ', nameMhs)
                 print('Nim   : ', nimMhs)
                 print('Prodi : ', prodiMhs)
@@ -156,6 +160,39 @@ class University:
             tanya = input('Cari data mahasiswa lagi (Y/N) ? : ');
             if tanya == 'y' or tanya == 'Y':
                 self.cariDataMahasiswa();
+            else:
+                self.menu();
+    
+    def hapusMhs(self):
+        benarSalah = False;
+        os.system('cls');
+        print('\tHapus Data Berdasarkan Nama/Nim');
+        print('='*50)
+        
+        search = input('Masukan Nama/Nim Mahasiswa : ');
+        
+        for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
+            if search == nameMhs or search == nimMhs:
+                University.namaMahasiswa.remove(nameMhs);
+                University.nimMahasiswa.remove(nimMhs);
+                University.prodiMahasiswa.remove(prodiMhs);
+                print('\nData Berhasil Dihapus!');
+                
+                benarSalah = True;
+                break;
+
+        if benarSalah ==  True:        
+            tanya = input('Hapus data mahasiswa lagi (Y/N) ? : ');
+            if tanya == 'y' or tanya == 'Y':
+                self.hapusMhs();
+            else:
+                self.menu();
+        else:
+            print('\nData Gagal Dihapus!');
+                
+            tanya = input('Hapus data mahasiswa lagi (Y/N) ? : ');
+            if tanya == 'y' or tanya == 'Y':
+                self.hapusMhs();
             else:
                 self.menu();
 
