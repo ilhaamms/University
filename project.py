@@ -118,33 +118,15 @@ class University:
 
                 dataFirst += 1;
             
-            try:
-                question = input('\nInput data mahasiswa lagi (Y/N) ? : ')
-            except KeyboardInterrupt:
-                for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-                # for dataMhs in range(dataFirst, dataInputMhs):
-                    University.namaMahasiswa.remove(nameMhs);
-                    University.nimMahasiswa.remove(nimMhs);
-                    University.prodiMahasiswa.remove(prodiMhs);
-
-                print('Data Tidak Tersimpan!');
-                print('\nTidak Boleh Mencet Ctrl + C');
+            question = input('Input Data Mahasiswa Lagi (Y/N) ? : ');
+            if question == 'y' or question == 'Y':
+                print('\nData Berhasil Tersimpan!!');
                 time.sleep(1.5);
-
-                question = input('Input Data Mahasiswa Lagi (Y/N) ? : ');
-                if question == 'y' or question == 'Y':
-                    self.inputDataMahasiswa();
-                else:
-                    self.menu();
+                self.inputDataMahasiswa();
             else:
-                if question == 'y' or question == 'Y':
-                    print('\nData Berhasil Tersimpan!!');
-                    time.sleep(1.5);
-                    self.inputDataMahasiswa();
-                else:
-                    print('\nData Berhasil Tersimpan!!');
-                    time.sleep(1.5);
-                    self.menu();
+                print('\nData Berhasil Tersimpan!!');
+                time.sleep(1.5);
+                self.menu();
 
     def cariDataMahasiswa(self):
         benarSalah = False;
