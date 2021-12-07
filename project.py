@@ -88,6 +88,8 @@ class University:
                 time.sleep(1.5);
                 self.lihatDataMhs();
         else:
+            # asign class list data mahasiswa with variabel global, and variabel global can't direct(langsung) asign, but declare first and then asign
+
             number = 1;
             print('\nNo             Nama                                          Nim                               Prodi');
             print('='*170);
