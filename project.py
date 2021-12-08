@@ -29,7 +29,8 @@ class University:
         print('[2] Input Data Mahasiswa');
         print('[3] Cari Data Mahasiswa');
         print('[4] Hapus Data Mahasiswa');
-        print('[5] Exit');
+        print('[5] Ubah Data Mahasiswa');
+        print('[6] Exit');
         
         # try for checking error, and block try for statement 
         try:
@@ -44,6 +45,8 @@ class University:
             elif menu == 4:
                 self.hapusMhs();
             elif menu == 5:
+                self.ubahDataMahasiswa();
+            elif menu == 6:
                 print('\n[-] Exit...');
                 time.sleep(1.5);
                 sys.exit();
@@ -190,6 +193,8 @@ class University:
             except KeyboardInterrupt:
                 os.system('cls');
 
+                print('\tInput Data Mahasiswa');
+                print('='*40);
                 print('Masukan Jumlah Yang Akan Diinput : ', dataInputMhs);
                 number = 1;
                 # showing all list using for loop with zip, and tempNamaMhs, tempNimMhs, tempProdiMhs is string in item data list
@@ -254,7 +259,8 @@ class University:
         # declare variabel boolean for checking search data true or false
         benarSalah = False;
         os.system('cls');
-        print('\tCari Data Berdasarkan Nama');
+        print('\t     Cari Data Mahasiswa');
+        print('\tCari Data Berdasarkan Nama/Nim');
         print('='*50)
         
         search = input('Masukan Nama Mahasiswa : ');
@@ -308,6 +314,7 @@ class University:
     def hapusMhs(self):
         benarSalah = False;
         os.system('cls');
+        print('\t      Hapus Data Mahasiswa')
         print('\tHapus Data Berdasarkan Nama/Nim');
         print('='*50)
         
@@ -360,6 +367,77 @@ class University:
                         print('\n[!]Jangan Masukan Angka Atau Huruf Selain Y/N')
                         time.sleep(1.5);
                         self.hapusMhs();
+    
+    def ubahDataMahasiswa(self):
+        benarSalah = False;
+        os.system('cls');
+        print('\t      Ubah Data Mahasiswa')
+        print('\tUbah Data Berdasarkan Nama/Nim');
+        print('='*50)
+        
+        try:
+            change = input('Masukan Nama/Nim Mahasiswa : ');
+        except KeyboardInterrupt:
+            print('\n\n[!]Jangan Mencet Tombol Ctrl + C ')
+            time.sleep(1.5);
+            self.ubahDataMahasiswa();
+        else:
+            for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
+                if change == nameMhs or change == nimMhs:      
+
+                    print('\nData Ditemukan!');
+                    changeName = input('\nMasukan Nama Baru     : ');
+                    changeNim  = input('Masukan Nim Baru      : ');
+                    changeProdi  = input('Masukan Prodi Baru    : ');
+
+                    University.namaMahasiswa.remove(nameMhs);
+                    University.nimMahasiswa.remove(nimMhs)
+                    University.prodiMahasiswa.remove(prodiMhs);
+                    
+                    benarSalah = True;
+                    break;
+
+            if benarSalah ==  True:
+                
+                University.tempNamaMhs.append(changeName);
+                University.tempNimMhs.append(changeNim);
+                University.tempProdiMhs.append(changeProdi);
+
+                University.namaMahasiswa  += University.tempNamaMhs
+                University.nimMahasiswa   += University.tempNimMhs
+                University.prodiMahasiswa += University.tempProdiMhs
+
+                University.tempNamaMhs.clear();
+                University.tempNimMhs.clear();
+                University.tempProdiMhs.clear();
+
+                print('\nData Berhasil Diubah');
+                tanya = input('\nUbah data mahasiswa lagi (Y/N) ? : ');
+                
+                if tanya == 'y' or tanya == 'Y':
+                    self.ubahDataMahasiswa();
+                elif tanya == 'n' or tanya == 'N':
+                    self.menu();
+                else:    
+                    print('\n[!]Jangan Masukan Angka Atau Huruf Selain Y/N')
+                    time.sleep(1.5);
+                    self.ubahDataMahasiswa();
+            else:
+                print('\nData Tidak Ditemukan!');
+                
+                try:
+                    question = input('\nUbah Data Mahasiswa Lagi (Y/N) ? : ')
+                except KeyboardInterrupt:
+                    self.menu();
+                if question == 'y' or question == 'Y':
+                    self.ubahDataMahasiswa();
+                elif question == 'n' or question == 'N':
+                    self.menu();
+                else:
+                    self.menu();
+
+        
+
 
 
 # in constructor have two parameter mahasiswa and dosen
