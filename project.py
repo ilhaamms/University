@@ -368,6 +368,7 @@ class University:
                         time.sleep(1.5);
                         self.hapusMhs();
     
+    # method change data mahasiswa
     def ubahDataMahasiswa(self):
         benarSalah = False;
         os.system('cls');
@@ -390,6 +391,7 @@ class University:
                     changeNim  = input('Masukan Nim Baru      : ');
                     changeProdi  = input('Masukan Prodi Baru    : ');
 
+                    # delete data now
                     University.namaMahasiswa.remove(nameMhs);
                     University.nimMahasiswa.remove(nimMhs)
                     University.prodiMahasiswa.remove(prodiMhs);
@@ -399,14 +401,17 @@ class University:
 
             if benarSalah ==  True:
                 
+                # add data new to data list temporary 
                 University.tempNamaMhs.append(changeName);
                 University.tempNimMhs.append(changeNim);
                 University.tempProdiMhs.append(changeProdi);
 
+                # sum data list in temporay to data list University
                 University.namaMahasiswa  += University.tempNamaMhs
                 University.nimMahasiswa   += University.tempNimMhs
                 University.prodiMahasiswa += University.tempProdiMhs
 
+                # clear all data in data list temporary
                 University.tempNamaMhs.clear();
                 University.tempNimMhs.clear();
                 University.tempProdiMhs.clear();
@@ -444,5 +449,13 @@ class University:
 # in create objek free insert in parameter string anything, because contsructor have two parameter
 obj_mahasiswa = University('Mahasiswa', 'Dosen');
 
-# call method menu in objek obj_mahasiswa
-obj_mahasiswa.menu();
+# fungsi utama main, sama seperti int main() pada c++
+if __name__ == '__main__':
+    
+    # call method menu in objek obj_mahasiswa
+    obj_mahasiswa.menu()
+    
+    # or
+    # can wear(pakai) start for call
+    # menu = obj_mahasiswa.menu()
+    # menu.start()
