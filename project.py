@@ -264,9 +264,10 @@ class University:
         print('='*50)
         
         search = input('Masukan Nama Mahasiswa : ');
-        
+
         for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-            if search == nameMhs or search == nimMhs:
+            # search and name upper/capital with method upper()
+            if search.upper() == nameMhs.upper() or search == nimMhs:
                 print('\nNama  : ', nameMhs)
                 print('Nim   : ', nimMhs)
                 print('Prodi : ', prodiMhs)
@@ -326,7 +327,7 @@ class University:
             self.hapusMhs();
         else:
             for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-                if search == nameMhs or search == nimMhs:
+                if search.upper() == nameMhs.upper() or search == nimMhs:
                     University.namaMahasiswa.remove(nameMhs);
                     University.nimMahasiswa.remove(nimMhs);
                     University.prodiMahasiswa.remove(prodiMhs);
@@ -384,7 +385,7 @@ class University:
             self.ubahDataMahasiswa();
         else:
             for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-                if change == nameMhs or change == nimMhs:      
+                if change.upper() == nameMhs.upper() or change == nimMhs:      
 
                     print('\nData Ditemukan!');
                     changeName = input('\nMasukan Nama Baru     : ');
