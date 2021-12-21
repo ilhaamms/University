@@ -2,6 +2,9 @@ import os; #import for clear
 import time; #import for sleep
 import sys; #import for exit
 
+# noted in change data must add feature new class
+# noted in input data if no want input data again, question again is input data again or no
+
 # class university
 class University:
 
@@ -16,9 +19,10 @@ class University:
     tempProdiMhs = [];
 
     # constructor must(wajib) have self in parameter
-    def __init__(self, mahasiswa, dosen):
-        self.mahasiswa = mahasiswa;
-        self.dosen = dosen;
+    def __init__(self, nama, nim, prodi):
+        self.nama = nama;
+        self.nim = nim;
+        self.prodi = prodi;
 
     # method menu, and all method must(wajib) have self in parameter
     def menu(self):
@@ -156,11 +160,12 @@ class University:
 
     # method input data mahasiswa
     def inputDataMahasiswa(self):
-        global dataInputMhs;
         os.system('cls');
         dataFirst = 0;
         print('\tInput Data Mahasiswa');
         print('='*40);
+        
+        global dataInputMhs;
         try:
             dataInputMhs = int(input('Masukan Jumlah Yang Akan Diinput : '));
         except ValueError:
@@ -176,14 +181,14 @@ class University:
             for dataMhs in range(dataFirst, dataInputMhs):
                 print('\nData Mahasiswa Ke-', dataFirst + 1);
                 print('='*25);
-                nama  = input('Masukan Nama  : ');
-                nim   = input('Masukan Nim   : ');
-                prodi = input('Masukan Prodi : ');
+                self.nama  = input('Masukan Nama  : ');
+                self.nim   = input('Masukan Nim   : ');
+                self.prodi = input('Masukan Prodi : ');
 
                 # append for adding list int last list
-                University.tempNamaMhs.append(nama);
-                University.tempNimMhs.append(nim);
-                University.tempProdiMhs.append(prodi);
+                University.tempNamaMhs.append(self.nama);
+                University.tempNimMhs.append(self.nim);
+                University.tempProdiMhs.append(self.prodi);
 
                 dataFirst += 1;
 
@@ -448,7 +453,7 @@ class University:
 
 # in constructor have two parameter mahasiswa and dosen
 # in create objek free insert in parameter string anything, because contsructor have two parameter
-obj_mahasiswa = University('Mahasiswa', 'Dosen');
+obj_mahasiswa = University('Nama', 'Nim', 'Prodi');
 
 # fungsi utama main, sama seperti int main() pada c++
 if __name__ == '__main__':
