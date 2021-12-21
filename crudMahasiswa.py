@@ -2,9 +2,6 @@ import os; #import for clear
 import time; #import for sleep
 import sys; #import for exit
 
-# noted in change data must add feature new class
-# noted in input data if no want input data again, question again is input data again or no
-
 # class university
 class University:
 
@@ -194,7 +191,8 @@ class University:
 
             try:
                 global question;
-                question = input('\nInput Data Mahasiswa Lagi (Y/N) ? : ');
+                print('\nData Berhasil Terinput')
+                question = input('Simpan Data Mahasiswa (Y/N) ? : ');
             except KeyboardInterrupt:
                 os.system('cls');
 
@@ -241,21 +239,27 @@ class University:
 
                     print('\nData Berhasil Tersimpan!!');
                     time.sleep(1.5);
-                    self.inputDataMahasiswa();
+                    question = input('Input Data Mahasiswa Lagi (Y/N) ? : ')
+                    if question == 'y' or question == 'Y':
+                        self.inputDataMahasiswa()
+                    else:
+                        self.menu()
 
                 elif question == 'n' or question == 'N':
 
-                    University.namaMahasiswa = University.namaMahasiswa + University.tempNamaMhs; 
-                    University.nimMahasiswa = University.nimMahasiswa + University.tempNimMhs; 
-                    University.prodiMahasiswa = University.prodiMahasiswa + University.tempProdiMhs; 
-                    
                     University.tempNamaMhs.clear();
                     University.tempNimMhs.clear();
                     University.tempProdiMhs.clear();
 
-                    print('\nData Berhasil Tersimpan!!');
+                    print('\nData Tidak Tersimpan!!');
                     time.sleep(1.5);
-                    self.menu();
+
+                    question = input('Input Data Mahasiswa Lagi (Y/N) ? : ')
+                    if question == 'y' or question == 'Y':
+                        self.inputDataMahasiswa()
+                    else:
+                        self.menu()
+
                 else:
                     self.cekDataUser();
 
