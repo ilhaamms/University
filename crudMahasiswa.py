@@ -1,6 +1,8 @@
 import os; #import for clear
 import time; #import for sleep
 import sys; #import for exit
+from prettytable import PrettyTable
+
 
 # class university
 class University:
@@ -14,6 +16,10 @@ class University:
     tempNamaMhs = [];
     tempNimMhs = [];
     tempProdiMhs = [];
+    
+    # using pretytable for neat(rapih) a data
+    global tabelSiswa
+    tabelSiswa = PrettyTable(["Nama", "Nim", "Prodi"])
 
     # constructor must(wajib) have self in parameter
     def __init__(self, nama, nim, prodi):
@@ -98,16 +104,8 @@ class University:
                     time.sleep(1.5);
                     self.lihatDataMhs();
         else:
-            number = 1;
-            print('\nNo             Nama                                          Nim                               Prodi');
-            print('='*170);
-            # showing all list using for loop with zip, and nameMhs, nimMhs, prodiMhs is string in item data list
-            for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-                print('\n',number,   end='     ');
-                print(nameMhs,  end='                            ');
-                print(nimMhs,   end='                        ');
-                print(prodiMhs, end='                 ');
-                number += 1
+            # print variabel tabelsiswa for show all data in table
+            print(tabelSiswa)
 
             try:
                 addDataMahasiswa = input('\n\n\t\t\t\t\t                       Tambah data mahasiswa (Y/N) ? : ');
@@ -186,6 +184,8 @@ class University:
                 University.tempNamaMhs.append(self.nama);
                 University.tempNimMhs.append(self.nim);
                 University.tempProdiMhs.append(self.prodi);
+                # add data in table preteytable, and using method title for all kapital in every word
+                tabelSiswa.add_row([self.nama.title(), self.nim, self.prodi.title()])
 
                 dataFirst += 1;
 
@@ -335,8 +335,12 @@ class University:
             time.sleep(1.5);
             self.hapusMhs();
         else:
+            # index for delete row
+            index = 0
             for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
-                if search.upper() == nameMhs.upper() or search == nimMhs:
+                if  search.upper() == nameMhs.upper() or search == nimMhs:
+                    # delete row table
+                    tabelSiswa.del_row(index)
                     University.namaMahasiswa.remove(nameMhs);
                     University.nimMahasiswa.remove(nimMhs);
                     University.prodiMahasiswa.remove(prodiMhs);
@@ -344,6 +348,8 @@ class University:
                     
                     benarSalah = True;
                     break;
+                # loop index until data exists
+                index += 1
 
             if benarSalah ==  True:        
                 try:
@@ -450,9 +456,6 @@ class University:
                     self.menu();
                 else:
                     self.menu();
-
-        
-
 
 
 # in constructor have two parameter mahasiswa and dosen
