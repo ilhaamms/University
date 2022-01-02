@@ -8,24 +8,26 @@ from prettytable import PrettyTable
 class University:
 
     # empty list for data mahasiswa
-    namaMahasiswa = [];
-    nimMahasiswa = [];
-    prodiMahasiswa = [];
+    namaMahasiswa = []
+    nimMahasiswa = []
+    prodiMahasiswa = []
 
     # empty list for chekcing data mahasiswa keyboard intterupt
-    tempNamaMhs = [];
-    tempNimMhs = [];
-    tempProdiMhs = [];
+    tempNamaMhs = []
+    tempNimMhs = []
+    tempProdiMhs = []
     
     # using pretytable for neat(rapih) a data
     global tabelSiswa
-    tabelSiswa = PrettyTable(["Nama", "Nim", "Prodi"])
+    tabelSiswa = PrettyTable(['Nama', 'Nim', 'Prodi'])
 
     # constructor must(wajib) have self in parameter
-    def __init__(self, nama, nim, prodi):
-        self.nama = nama;
-        self.nim = nim;
-        self.prodi = prodi;
+    def __init__(self, firstName, lastName, nim, prodi):
+        self.firstName = firstName
+        self.lastName = lastName
+        self.nim = nim
+        self.prodi = prodi
+        self.no = [0]
 
     # method menu, and all method must(wajib) have self in parameter
     def menu(self):
@@ -105,6 +107,7 @@ class University:
                     self.lihatDataMhs();
         else:
             # print variabel tabelsiswa for show all data in table
+            tabelSiswa.sortby = 'Nama'
             print(tabelSiswa)
 
             try:
@@ -174,20 +177,30 @@ class University:
             self.inputDataMahasiswa();
         else:
             for dataMhs in range(dataFirst, dataInputMhs):
+                
+                # for number in self.no:
+                #     print(number)
+
                 print('\nData Mahasiswa Ke-', dataFirst + 1);
                 print('='*25);
-                self.nama  = input('Masukan Nama  : ');
-                self.nim   = input('Masukan Nim   : ');
-                self.prodi = input('Masukan Prodi : ');
+                self.firstName = input('Masukan Nama Depan    : ');
+                self.lastName  = input('Masukan Nama Belakang : ');
+                self.nim       = input('Masukan Nim           : ');
+                self.prodi     = input('Masukan Prodi         : ');
 
-                # append for adding list int last list
-                University.tempNamaMhs.append(self.nama);
+                nama = self.firstName + self.lastName
+
+                # append for adding list int last index list
+                University.tempNamaMhs.append(nama);
                 University.tempNimMhs.append(self.nim);
                 University.tempProdiMhs.append(self.prodi);
                 # add data in table preteytable, and using method title for all kapital in every word
-                tabelSiswa.add_row([self.nama.title(), self.nim, self.prodi.title()])
+                # for number in self.no:
+                
+                
+                tabelSiswa.add_row([nama.title(), self.nim, self.prodi.title()])
 
-                dataFirst += 1;
+                dataFirst += 1
 
             try:
                 global question;
@@ -277,9 +290,9 @@ class University:
         for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
             # search and name upper/capital with method upper()
             if search.upper() == nameMhs.upper() or search == nimMhs:
-                print('\nNama  : ', nameMhs)
-                print('Nim   : ', nimMhs)
-                print('Prodi : ', prodiMhs)
+                print('\nNama  : ', nameMhs.title())
+                print('Nim   : ', nimMhs.title())
+                print('Prodi : ', prodiMhs.title())
                 print('\nData Ditemukan!');
                 
                 # if name or nim true, break(out of loop)
@@ -412,6 +425,7 @@ class University:
                     University.namaMahasiswa.remove(nameMhs);
                     University.nimMahasiswa.remove(nimMhs)
                     University.prodiMahasiswa.remove(prodiMhs);
+                    # delete data now in table
                     tabelSiswa.del_row(index)
                     
                     benarSalah = True;
@@ -429,6 +443,7 @@ class University:
                 University.namaMahasiswa  += University.tempNamaMhs
                 University.nimMahasiswa   += University.tempNimMhs
                 University.prodiMahasiswa += University.tempProdiMhs
+                # add data now in table
                 tabelSiswa.add_row([changeName.title(), changeNim.title(), changeProdi.title()])
 
                 # clear all data in data list temporary
@@ -464,7 +479,7 @@ class University:
 
 # in constructor have two parameter mahasiswa and dosen
 # in create objek free insert in parameter string anything, because contsructor have two parameter
-obj_mahasiswa = University('Nama', 'Nim', 'Prodi');
+obj_mahasiswa = University('firstName', 'lastName', 'Nim', 'Prodi');
 
 # fungsi utama main, sama seperti int main() pada c++
 if __name__ == '__main__':
