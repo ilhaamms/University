@@ -399,6 +399,7 @@ class University:
             time.sleep(1.5);
             self.ubahDataMahasiswa();
         else:
+            index = 0
             for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
                 if change.upper() == nameMhs.upper() or change == nimMhs:      
 
@@ -411,9 +412,11 @@ class University:
                     University.namaMahasiswa.remove(nameMhs);
                     University.nimMahasiswa.remove(nimMhs)
                     University.prodiMahasiswa.remove(prodiMhs);
+                    tabelSiswa.del_row(index)
                     
                     benarSalah = True;
                     break;
+                index += 1
 
             if benarSalah ==  True:
                 
@@ -426,6 +429,7 @@ class University:
                 University.namaMahasiswa  += University.tempNamaMhs
                 University.nimMahasiswa   += University.tempNimMhs
                 University.prodiMahasiswa += University.tempProdiMhs
+                tabelSiswa.add_row([changeName.title(), changeNim.title(), changeProdi.title()])
 
                 # clear all data in data list temporary
                 University.tempNamaMhs.clear();
