@@ -104,6 +104,8 @@ class University:
                     time.sleep(1.5);
                     self.lihatDataMhs();
         else:
+            # sort table data by name
+            tabelSiswa.sortby = 'Nama'
             # print variabel tabelsiswa for show all data in table
             print(tabelSiswa)
 
@@ -186,7 +188,6 @@ class University:
                 University.tempProdiMhs.append(self.prodi);
                 # add data in table preteytable, and using method title for all kapital in every word
                 tabelSiswa.add_row([self.nama.title(), self.nim, self.prodi.title()])
-
                 dataFirst += 1;
 
             try:
