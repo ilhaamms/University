@@ -186,8 +186,7 @@ class University:
                 University.tempNamaMhs.append(self.nama);
                 University.tempNimMhs.append(self.nim);
                 University.tempProdiMhs.append(self.prodi);
-                # add data in table preteytable, and using method title for all kapital in every word
-                tabelSiswa.add_row([self.nama.title(), self.nim, self.prodi.title()])
+                
                 dataFirst += 1;
 
             try:
@@ -227,8 +226,14 @@ class University:
 
             # block else in block try except is if not error anything
             else:
+                number = 1;
                 if question == 'y' or question == 'Y':
                     
+                    for tempNamaMhs, tempNimMhs, tempProdiMhs in zip(University.tempNamaMhs, University.tempNimMhs, University.tempProdiMhs):
+
+                        tabelSiswa.add_row([tempNamaMhs.title(), tempNimMhs, tempProdiMhs.title()])
+                        number += 1;
+
                     # adding two list with plus
                     University.namaMahasiswa = University.namaMahasiswa + University.tempNamaMhs; 
                     University.nimMahasiswa = University.nimMahasiswa + University.tempNimMhs; 
@@ -278,9 +283,9 @@ class University:
         for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
             # search and name upper/capital with method upper()
             if search.upper() == nameMhs.upper() or search == nimMhs:
-                print('\nNama  : ', nameMhs)
-                print('Nim   : ', nimMhs)
-                print('Prodi : ', prodiMhs)
+                print('\nNama  : ', nameMhs.title())
+                print('Nim   : ', nimMhs.title())
+                print('Prodi : ', prodiMhs.title())
                 print('\nData Ditemukan!');
                 
                 # if name or nim true, break(out of loop)
@@ -340,50 +345,53 @@ class University:
             index = 0
             for nameMhs, nimMhs, prodiMhs in zip(University.namaMahasiswa, University.nimMahasiswa, University.prodiMahasiswa):
                 if  search.upper() == nameMhs.upper() or search == nimMhs:
-                    # delete row table
-                    tabelSiswa.del_row(index)
-                    University.namaMahasiswa.remove(nameMhs);
-                    University.nimMahasiswa.remove(nimMhs);
-                    University.prodiMahasiswa.remove(prodiMhs);
-                    print('\nData Berhasil Dihapus!');
-                    
-                    benarSalah = True;
-                    break;
-                # loop index until data exists
-                index += 1
+                    print('\nData Ditemukan !!')
+                    print('='*25)
+                    print('Nama  : ', nameMhs.title())
+                    print('Nim   : ', nimMhs.title())
+                    print('Prodi : ', prodiMhs.title())
+
+                    benarSalah = True
+                    break
+                # loop variabel index for search index data mahasiswa
+                index += 1    
 
             if benarSalah ==  True:        
                 try:
-                    tanya = input('\nHapus data mahasiswa lagi (Y/N) ? : ');
+                    question = input('\nHapus Data Mahasiswa (Y/N) ? : ')
                 except KeyboardInterrupt:
                     time.sleep(1.5);
                     self.hapusMhs();
                 else:
-                    if tanya == 'y' or tanya == 'Y':
-                        self.hapusMhs();
-                    elif tanya == 'n' or tanya == 'N':
-                        self.menu();
-                    else:    
+                    if question == 'y' or question == 'y':
+                        tabelSiswa.del_row(index)
+                        University.namaMahasiswa.remove(nameMhs);
+                        University.nimMahasiswa.remove(nimMhs);
+                        University.prodiMahasiswa.remove(prodiMhs);
+                        
+                        print('\nData Berhasil Dihapus!');
+    
+                        question = input('Hapus Data Mahasiswa Lagi (Y/N) ? : ')
+                        if question == 'y' or question == 'Y':
+                            self.hapusMhs()
+                        elif question == 'n' or question == 'N':
+                            self.menu()
+                        else:    
+                            print('\n[!]Jangan Masukan Angka Atau Huruf Selain Y/N')
+                            time.sleep(1.5);
+                            self.hapusMhs();
+                    elif question == 'n' or question == 'N':
+                        print('\nHapus Data Dibatalkan')
+                        
+                        question = input('Coba Hapus Data Lagi (Y/N) ? : ')
+                        if question == 'y' or question == 'Y':
+                            self.hapusMhs()
+                        elif question == 'n' or question == 'N':
+                            self.menu()
+                        self.menu()
+                    else:
                         print('\n[!]Jangan Masukan Angka Atau Huruf Selain Y/N')
-                        time.sleep(1.5);
-                        self.hapusMhs();
-            else:
-                print('\nData Tidak Ditemukan!');
-                    
-                try:
-                    tanya = input('\nCoba Hapus data mahasiswa lagi (Y/N) ? : ');
-                except KeyboardInterrupt:
-                    print('\n\n[!]Jangan Mencet Tombol Ctrl + C');
-                    time.sleep(1.5);
-                else:
-                    if tanya == 'y' or tanya == 'Y':
-                        self.hapusMhs();
-                    elif tanya == 'n' or tanya == 'N':
-                        self.menu();
-                    else:    
-                        print('\n[!]Jangan Masukan Angka Atau Huruf Selain Y/N')
-                        time.sleep(1.5);
-                        self.hapusMhs();
+
     
     # method change data mahasiswa
     def ubahDataMahasiswa(self):
