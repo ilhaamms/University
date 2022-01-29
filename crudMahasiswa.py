@@ -6,6 +6,7 @@ from prettytable import PrettyTable
 
 # class university
 class University:
+# tes
 
     # empty list for data mahasiswa
     namaMahasiswa = [];
