@@ -31,7 +31,7 @@ class University:
     # method menu, and all method must(wajib) have self in parameter
     def menu(self):
         os.system('cls');
-        print('\tUniversitas Muhammadiyah Prof Dr.Hamka');
+        print('\t\tUniversitas Indonesia');
         print('='*55);
         print('[1] Lihat Data Mahasiswa');
         print('[2] Input Data Mahasiswa');
@@ -84,14 +84,12 @@ class University:
         
         # checking if list empty
         if University.namaMahasiswa == []:
-            print('\nNo             Nama                                          Nim                               Prodi');
-            print('='*170);
-            print('\n\n                             \t\t\t\t\tBelum ada data yang diinput')
+            print('\nBelum ada data yang diinput')
             
             try:
-                addDataMahasiswa = input('\n\n\t\t\t\t\t                       Tambah data mahasiswa (Y/N) ? : ');
+                addDataMahasiswa = input('\nTambah data mahasiswa (Y/N) ? : ');
             except KeyboardInterrupt:
-                print('\n\n\t\t\t\t\t                       [!]Tidak Boleh Mencet Ctrl + C');
+                print('\n[!]Tidak Boleh Mencet Ctrl + C');
                 time.sleep(1.5);
                 self.lihatDataMhs();
             # blcok else ekesepsi for block not anything error
@@ -101,7 +99,7 @@ class University:
                 elif addDataMahasiswa == 'n' or addDataMahasiswa == 'N':
                     self.menu();
                 else:
-                    print('\t\t\t\t                      [!]Jangan Masukan Angka Atau Huruf Lain Selain Y/N !');
+                    print('\t[!]Jangan Masukan Angka Atau Huruf Lain Selain Y/N !');
                     time.sleep(1.5);
                     self.lihatDataMhs();
         else:
@@ -111,9 +109,9 @@ class University:
             print(tabelSiswa)
 
             try:
-                addDataMahasiswa = input('\n\n\t\t\t\t\t                       Tambah data mahasiswa (Y/N) ? : ');
+                addDataMahasiswa = input('\nTambah data mahasiswa (Y/N) ? : ');
             except KeyboardInterrupt:
-                print('\n\n\t\t\t\t\t                       [!]Tidak Boleh Mencet Ctrl + C');
+                print('\n[!]Tidak Boleh Mencet Ctrl + C');
                 time.sleep(1.5);
                 self.lihatDataMhs();
             else:
@@ -122,7 +120,7 @@ class University:
                 elif addDataMahasiswa == 'n' or addDataMahasiswa == 'N':
                     self.menu();
                 else:
-                    print('\t\t\t\t                      [!]Jangan Masukan Angka Atau Huruf Lain Selain Y/N !');
+                    print('\t[!]Jangan Masukan Angka Atau Huruf Lain Selain Y/N !');
                     time.sleep(1.5);
                     self.lihatDataMhs();
 
@@ -392,6 +390,22 @@ class University:
                         self.menu()
                     else:
                         print('\n[!]Jangan Masukan Angka Atau Huruf Selain Y/N')
+            else:
+                print('\nData Tidak Ditemukan!');
+                try:
+                    tanya = input('Coba Hapus data mahasiswa lagi (Y/N) ? : ');
+                    if tanya == 'y' or tanya == 'Y':
+                        self.hapusMhs();
+                    elif tanya == 'n' or tanya == 'N':
+                        self.menu();
+                    else:
+                        print('\n[!]Jangan Masukan Angka Atau Huruf Selain Y/N')
+                        time.sleep(1.5);
+                        self.hapusMhs();
+                except KeyboardInterrupt:
+                    print('\n\n[!]Jangan Mencet Tombol Ctrl + C');
+                    time.sleep(1.5);
+                    self.hapusMhs();
 
     
     # method change data mahasiswa
